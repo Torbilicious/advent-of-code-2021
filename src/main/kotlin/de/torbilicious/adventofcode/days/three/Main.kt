@@ -7,24 +7,28 @@ data class PositionInformation(
 )
 
 fun main() {
-    val counters = calculatePositionInformation(diagnosticts.lines())
+//    val datasetToUse = exampleDiagnostics
+    val datasetToUse = diagnosticts
 
-    println(counters)
+    val counters = calculatePositionInformation(datasetToUse.lines())
+
+//    println(counters)
 
     calculateGammaAndEpsilonRate(counters)
 
-    calculateLifeSupportRating(diagnosticts)
+    calculateLifeSupportRating(datasetToUse)
 }
 
 fun calculateLifeSupportRating(text: String) {
-
     println(text)
 
+    val amountOfPositions = text.lines().first().length
     var currentLines = text.lines()
     var position = 0
     var amountOfLinesRemaining = currentLines.size
     while (amountOfLinesRemaining != 1) {
-        val info = calculatePositionInformation(currentLines)[position]
+        val infos = calculatePositionInformation(currentLines)
+        val info = infos[amountOfPositions - position - 1]
         val digitToKeep = if (info.amountOfOnes >= info.amountOfZeros) {
             '1'
         } else {
@@ -34,8 +38,7 @@ fun calculateLifeSupportRating(text: String) {
         println(info)
         println("For $position keep $digitToKeep")
 
-        currentLines = currentLines
-            .filter { it[it.length - 1 - position] == digitToKeep }
+        currentLines = currentLines.filter { it[position] == digitToKeep }
 
 
         println(currentLines)
@@ -46,11 +49,13 @@ fun calculateLifeSupportRating(text: String) {
 
     val oxygenGeneratorRating = currentLines.first().binaryToInt()
 
+
     currentLines = text.lines()
     position = 0
     amountOfLinesRemaining = currentLines.size
     while (amountOfLinesRemaining != 1) {
-        val info = calculatePositionInformation(currentLines)[position]
+        val infos = calculatePositionInformation(currentLines)
+        val info = infos[amountOfPositions - position - 1]
         val digitToKeep = if (info.amountOfOnes >= info.amountOfZeros) {
             '0'
         } else {
@@ -60,8 +65,7 @@ fun calculateLifeSupportRating(text: String) {
         println(info)
         println("For $position keep $digitToKeep")
 
-        currentLines = currentLines
-            .filter { it[it.length - 1 - position] == digitToKeep }
+        currentLines = currentLines.filter { it[position] == digitToKeep }
 
 
         println(currentLines)
@@ -72,7 +76,6 @@ fun calculateLifeSupportRating(text: String) {
 
 
     val cO2ScrubberRating = currentLines.first().binaryToInt()
-
 
 
     println("oxygenGeneratorRating: $oxygenGeneratorRating")
