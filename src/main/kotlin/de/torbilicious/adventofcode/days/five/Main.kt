@@ -101,14 +101,17 @@ fun main() {
                 }
 
                 var currentPoint = line.point1
-                do {
+                var running = true
+                while (running) {
                     grid[currentPoint.x][currentPoint.y]++
+
+                    running = currentPoint != line.point2
 
                     currentPoint = Point(
                         currentPoint.x + diagonalOrientation.xDiff,
                         currentPoint.y + diagonalOrientation.yDiff,
                     )
-                } while(currentPoint != line.point2)
+                }
             }
         }
 
