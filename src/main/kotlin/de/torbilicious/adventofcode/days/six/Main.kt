@@ -10,17 +10,9 @@ fun main() {
     val datasetToUse = fishes
 
     // <DaysUntilNewFish, AmountOfFishesInThisDay>
-    var pool = mutableMapOf(
-        0 to datasetToUse.count { it == 0 }.toBigInteger(),
-        1 to datasetToUse.count { it == 1 }.toBigInteger(),
-        2 to datasetToUse.count { it == 2 }.toBigInteger(),
-        3 to datasetToUse.count { it == 3 }.toBigInteger(),
-        4 to datasetToUse.count { it == 4 }.toBigInteger(),
-        5 to datasetToUse.count { it == 5 }.toBigInteger(),
-        6 to datasetToUse.count { it == 6 }.toBigInteger(),
-        7 to datasetToUse.count { it == 7 }.toBigInteger(),
-        8 to datasetToUse.count { it == 8 }.toBigInteger(),
-    )
+    var pool = (0..8)
+        .associateWith { days -> datasetToUse.count { it == days }.toBigInteger() }
+        .toMutableMap()
 
 
     //part one
