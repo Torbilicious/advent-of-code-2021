@@ -2,7 +2,7 @@ package de.torbilicious.adventofcode.days.six
 
 fun main() {
 //    var pool = exampleFishes.toMutableList()
-    var pool = fishes.toMutableList()
+    var pool = fishes
 
     repeat(80) {
         pool = step(pool)
@@ -11,7 +11,7 @@ fun main() {
     println("Amount of fishes: ${pool.size}")
 }
 
-fun step(pool: MutableList<Int>): MutableList<Int> {
+fun step(pool: List<Int>): List<Int> {
 
     val toBeAdded = mutableListOf<Int>()
 
@@ -25,7 +25,7 @@ fun step(pool: MutableList<Int>): MutableList<Int> {
                 it - 1
             }
         }
-    }.toMutableList()
+    }
 
-    return (newPool + toBeAdded).toMutableList()
+    return newPool + toBeAdded
 }
