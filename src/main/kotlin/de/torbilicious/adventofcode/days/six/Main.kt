@@ -11,15 +11,15 @@ fun main() {
 
     // <DaysUntilNewFish, AmountOfFishesInThisDay>
     var pool = mutableMapOf(
-        0.toBigInteger() to datasetToUse.count { it == 0 }.toBigInteger(),
-        1.toBigInteger() to datasetToUse.count { it == 1 }.toBigInteger(),
-        2.toBigInteger() to datasetToUse.count { it == 2 }.toBigInteger(),
-        3.toBigInteger() to datasetToUse.count { it == 3 }.toBigInteger(),
-        4.toBigInteger() to datasetToUse.count { it == 4 }.toBigInteger(),
-        5.toBigInteger() to datasetToUse.count { it == 5 }.toBigInteger(),
-        6.toBigInteger() to datasetToUse.count { it == 6 }.toBigInteger(),
-        7.toBigInteger() to datasetToUse.count { it == 7 }.toBigInteger(),
-        8.toBigInteger() to datasetToUse.count { it == 8 }.toBigInteger(),
+        0 to datasetToUse.count { it == 0 }.toBigInteger(),
+        1 to datasetToUse.count { it == 1 }.toBigInteger(),
+        2 to datasetToUse.count { it == 2 }.toBigInteger(),
+        3 to datasetToUse.count { it == 3 }.toBigInteger(),
+        4 to datasetToUse.count { it == 4 }.toBigInteger(),
+        5 to datasetToUse.count { it == 5 }.toBigInteger(),
+        6 to datasetToUse.count { it == 6 }.toBigInteger(),
+        7 to datasetToUse.count { it == 7 }.toBigInteger(),
+        8 to datasetToUse.count { it == 8 }.toBigInteger(),
     )
 
 
@@ -40,17 +40,17 @@ fun main() {
     println("Amount of fishes: ${pool.values.sumOf { it }}")
 }
 
-fun step(pool: MutableMap<NumberType, NumberType>): MutableMap<NumberType, NumberType> {
-    val nextPool = mutableMapOf<NumberType, NumberType>()
+fun step(pool: MutableMap<Int, NumberType>): MutableMap<Int, NumberType> {
+    val nextPool = mutableMapOf<Int, NumberType>()
 
     pool.forEach {
         when (it.key) {
-            0.toBigInteger() -> {
-                nextPool.addTo(6.toBigInteger(), it.value)
-                nextPool.addTo(8.toBigInteger(), it.value)
+            0 -> {
+                nextPool.addTo(6, it.value)
+                nextPool.addTo(8, it.value)
             }
             else -> {
-                nextPool.addTo(it.key - 1.toBigInteger(), it.value)
+                nextPool.addTo(it.key - 1, it.value)
             }
         }
     }
@@ -58,7 +58,7 @@ fun step(pool: MutableMap<NumberType, NumberType>): MutableMap<NumberType, Numbe
     return nextPool
 }
 
-fun MutableMap<NumberType, NumberType>.addTo(key: NumberType, value: NumberType) {
+fun MutableMap<Int, NumberType>.addTo(key: Int, value: NumberType) {
     val existingValue = if (this.containsKey(key)) {
         this[key]
     } else {
