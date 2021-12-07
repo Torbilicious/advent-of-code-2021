@@ -3,8 +3,8 @@ package de.torbilicious.adventofcode.days.seven
 import kotlin.math.absoluteValue
 
 fun main() {
-//    val datasetToUse = exampleCrabPositions
-    val datasetToUse = crabPositions
+    val datasetToUse = exampleCrabPositions
+//    val datasetToUse = crabPositions
 
     val idealAlignedPosition = datasetToUse.median()
 
